@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RTX Watch & Parts — Prijedlog dizajna</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ─── Reset & Base ─── */
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --gold: #c9a84c;
+        --gold-light: #e0c270;
+        --dark: #0c0c0c;
+        --dark-2: #141414;
+        --dark-3: #1e1e1e;
+        --dark-4: #2a2a2a;
+        --light: #f5f0e8;
+        --text-muted: #888;
+        --text-light: #ccc;
+        --serif: 'Playfair Display', Georgia, serif;
+        --sans: 'Inter', system-ui, sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--dark);
+        color: var(--light);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ─── Mockup Banner ─── */
+      .mockup-banner {
+        background: #c9a84c;
+        color: #0c0c0c;
+        text-align: center;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        font-family: var(--sans);
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+      }
+
+      /* ─── Navigation ─── */
+      nav {
+        position: fixed;
+        top: 33px;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 20px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        background: rgba(12, 12, 12, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+      }
+
+      .nav-logo {
+        font-family: var(--serif);
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--gold);
+        letter-spacing: 0.1em;
+      }
+
+      .nav-logo span {
+        color: var(--light);
+        font-weight: 400;
+        font-size: 13px;
+        display: block;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-top: -4px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 36px;
+        list-style: none;
+        align-items: center;
+      }
+
+      .nav-links a {
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-light);
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--gold);
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .nav-lang {
+        display: flex;
+        gap: 10px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        color: var(--text-muted);
+      }
+
+      .nav-lang span {
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .nav-lang span.active {
+        color: var(--gold);
+      }
+
+      .nav-lang span:hover {
+        color: var(--gold-light);
+      }
+
+      .nav-cart {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: var(--text-light);
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+
+      .nav-cart:hover {
+        color: var(--gold);
+      }
+
+      /* ─── Hero ─── */
+      .hero {
+        position: relative;
+        height: 100vh;
+        min-height: 700px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .hero-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        filter: brightness(0.45);
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to right,
+          rgba(12, 12, 12, 0.9) 40%,
+          rgba(12, 12, 12, 0.2) 100%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 620px;
+        padding: 0 60px;
+        margin-top: 60px;
+      }
+
+      .hero-tag {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+        border-left: 2px solid var(--gold);
+        padding-left: 12px;
+      }
+
+      .hero-title {
+        font-family: var(--serif);
+        font-size: clamp(42px, 5vw, 68px);
+        font-weight: 700;
+        line-height: 1.1;
+        color: #fff;
+        margin-bottom: 24px;
+      }
+
+      .hero-title em {
+        color: var(--gold);
+        font-style: normal;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+        font-weight: 300;
+        color: var(--text-light);
+        max-width: 460px;
+        margin-bottom: 40px;
+        line-height: 1.8;
+      }
+
+      .hero-cta {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        display: inline-block;
+        padding: 15px 36px;
+        background: var(--gold);
+        color: var(--dark);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        transition: background 0.2s, transform 0.2s;
+        cursor: pointer;
+      }
+
+      .btn-primary:hover {
+        background: var(--gold-light);
+        transform: translateY(-1px);
+      }
+
+      .btn-outline {
+        display: inline-block;
+        padding: 15px 36px;
+        border: 1px solid rgba(201, 168, 76, 0.5);
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        transition: border-color 0.2s, background 0.2s;
+        cursor: pointer;
+      }
+
+      .btn-outline:hover {
+        border-color: var(--gold);
+        background: rgba(201, 168, 76, 0.08);
+      }
+
+      .hero-stats {
+        position: absolute;
+        bottom: 50px;
+        right: 60px;
+        z-index: 2;
+        display: flex;
+        gap: 48px;
+      }
+
+      .hero-stat {
+        text-align: center;
+      }
+
+      .hero-stat-num {
+        font-family: var(--serif);
+        font-size: 36px;
+        font-weight: 700;
+        color: var(--gold);
+        line-height: 1;
+      }
+
+      .hero-stat-label {
+        font-size: 11px;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-top: 6px;
+      }
+
+      /* ─── USP Strip ─── */
+      .usp-strip {
+        background: var(--dark-3);
+        border-top: 1px solid rgba(201, 168, 76, 0.2);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        padding: 36px 60px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .usp-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 0 20px;
+        border-right: 1px solid rgba(201, 168, 76, 0.15);
+      }
+
+      .usp-item:last-child {
+        border-right: none;
+      }
+
+      .usp-icon {
+        font-size: 28px;
+        flex-shrink: 0;
+      }
+
+      .usp-text strong {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--light);
+        margin-bottom: 2px;
+      }
+
+      .usp-text span {
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      /* ─── Section base ─── */
+      section {
+        padding: 100px 60px;
+      }
+
+      .section-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 16px;
+      }
+
+      .section-title {
+        font-family: var(--serif);
+        font-size: clamp(32px, 3.5vw, 48px);
+        font-weight: 700;
+        color: var(--light);
+        line-height: 1.2;
+        margin-bottom: 16px;
+      }
+
+      .section-desc {
+        font-size: 15px;
+        color: var(--text-muted);
+        max-width: 540px;
+        line-height: 1.8;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: 56px;
+        gap: 40px;
+      }
+
+      .section-header .right {
+        flex-shrink: 0;
+      }
+
+      /* ─── Categories ─── */
+      .categories {
+        background: var(--dark-2);
+      }
+
+      .categories-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .category-card {
+        position: relative;
+        height: 520px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .category-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        filter: brightness(0.6);
+      }
+
+      .category-card:hover img {
+        transform: scale(1.04);
+      }
+
+      .category-card-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(12, 12, 12, 0.85) 30%, transparent 70%);
+      }
+
+      .category-card-content {
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        right: 40px;
+      }
+
+      .category-tag {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 10px;
+      }
+
+      .category-title {
+        font-family: var(--serif);
+        font-size: 36px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 16px;
+      }
+
+      .category-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.4);
+        padding-bottom: 4px;
+        transition: border-color 0.2s;
+      }
+
+      .category-card:hover .category-cta {
+        border-color: var(--gold);
+      }
+
+      /* ─── Featured Watches ─── */
+      .featured {
+        background: var(--dark);
+      }
+
+      .watches-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+
+      .watch-card {
+        background: var(--dark-2);
+        border: 1px solid rgba(201, 168, 76, 0.1);
+        overflow: hidden;
+        transition: border-color 0.3s, transform 0.3s;
+        cursor: pointer;
+      }
+
+      .watch-card:hover {
+        border-color: rgba(201, 168, 76, 0.4);
+        transform: translateY(-4px);
+      }
+
+      .watch-card-img {
+        position: relative;
+        height: 280px;
+        overflow: hidden;
+        background: var(--dark-3);
+      }
+
+      .watch-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        filter: brightness(0.9);
+      }
+
+      .watch-card:hover .watch-card-img img {
+        transform: scale(1.05);
+      }
+
+      .watch-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: var(--gold);
+        color: var(--dark);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+      }
+
+      .watch-card-body {
+        padding: 24px;
+      }
+
+      .watch-brand {
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 8px;
+      }
+
+      .watch-name {
+        font-family: var(--serif);
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--light);
+        margin-bottom: 4px;
+        line-height: 1.3;
+      }
+
+      .watch-ref {
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 20px;
+      }
+
+      .watch-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid rgba(201, 168, 76, 0.1);
+        padding-top: 16px;
+      }
+
+      .watch-price {
+        font-family: var(--serif);
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--light);
+      }
+
+      .watch-price span {
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--text-muted);
+        font-family: var(--sans);
+      }
+
+      .watch-btn {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        border: 1px solid rgba(201, 168, 76, 0.4);
+        padding: 8px 16px;
+        transition: background 0.2s, border-color 0.2s;
+      }
+
+      .watch-card:hover .watch-btn {
+        background: rgba(201, 168, 76, 0.1);
+        border-color: var(--gold);
+      }
+
+      /* ─── About ─── */
+      .about {
+        background: var(--dark-2);
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 600px;
+      }
+
+      .about-img {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .about-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.75);
+      }
+
+      .about-img-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, transparent 70%, var(--dark-2) 100%);
+      }
+
+      .about-content {
+        padding: 100px 80px 100px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .about-content .section-desc {
+        max-width: 100%;
+        margin-bottom: 40px;
+      }
+
+      .about-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin-bottom: 44px;
+      }
+
+      .about-list li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 14px;
+        color: var(--text-light);
+      }
+
+      .about-list li::before {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 1px;
+        background: var(--gold);
+        flex-shrink: 0;
+      }
+
+      /* ─── Service Process ─── */
+      .service {
+        background: var(--dark);
+      }
+
+      .service-steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        margin-top: 56px;
+        position: relative;
+      }
+
+      .service-steps::before {
+        content: '';
+        position: absolute;
+        top: 40px;
+        left: 12.5%;
+        right: 12.5%;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(201, 168, 76, 0.4) 20%,
+          rgba(201, 168, 76, 0.4) 80%,
+          transparent
+        );
+        z-index: 0;
+      }
+
+      .service-step {
+        text-align: center;
+        padding: 0 24px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .step-num {
+        width: 80px;
+        height: 80px;
+        border: 1px solid rgba(201, 168, 76, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 28px;
+        background: var(--dark);
+        font-family: var(--serif);
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--gold);
+        transition: background 0.3s, border-color 0.3s;
+      }
+
+      .service-step:hover .step-num {
+        background: rgba(201, 168, 76, 0.1);
+        border-color: var(--gold);
+      }
+
+      .step-title {
+        font-family: var(--serif);
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--light);
+        margin-bottom: 10px;
+      }
+
+      .step-desc {
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.7;
+      }
+
+      /* ─── Certifikat Banner ─── */
+      .cert-banner {
+        background: var(--dark-3);
+        border-top: 1px solid rgba(201, 168, 76, 0.2);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        padding: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+      }
+
+      .cert-banner-text {
+        max-width: 600px;
+      }
+
+      .cert-banner-text h3 {
+        font-family: var(--serif);
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--light);
+        margin-bottom: 10px;
+      }
+
+      .cert-banner-text p {
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.8;
+      }
+
+      /* ─── Instagram ─── */
+      .instagram {
+        background: var(--dark-2);
+        text-align: center;
+      }
+
+      .instagram .section-header {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .instagram .section-desc {
+        margin: 0 auto;
+      }
+
+      .insta-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+        margin-top: 48px;
+      }
+
+      .insta-item {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .insta-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease, filter 0.4s ease;
+        filter: brightness(0.85) saturate(0.8);
+      }
+
+      .insta-item:hover img {
+        transform: scale(1.06);
+        filter: brightness(1) saturate(1);
+      }
+
+      .insta-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(12, 12, 12, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .insta-item:hover .insta-overlay {
+        opacity: 1;
+      }
+
+      .insta-overlay span {
+        font-size: 22px;
+        color: #fff;
+      }
+
+      .insta-handle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 36px;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--gold);
+        letter-spacing: 0.05em;
+      }
+
+      /* ─── Footer ─── */
+      footer {
+        background: #080808;
+        padding: 80px 60px 40px;
+        border-top: 1px solid rgba(201, 168, 76, 0.15);
+      }
+
+      .footer-top {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.5fr;
+        gap: 60px;
+        margin-bottom: 60px;
+      }
+
+      .footer-brand .nav-logo {
+        font-size: 28px;
+        margin-bottom: 16px;
+      }
+
+      .footer-brand p {
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.8;
+        max-width: 280px;
+        margin-bottom: 24px;
+      }
+
+      .footer-socials {
+        display: flex;
+        gap: 12px;
+      }
+
+      .footer-social-link {
+        width: 36px;
+        height: 36px;
+        border: 1px solid rgba(201, 168, 76, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: var(--text-muted);
+        transition: border-color 0.2s, color 0.2s;
+        cursor: pointer;
+      }
+
+      .footer-social-link:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+
+      .footer-col h4 {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 20px;
+      }
+
+      .footer-col ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .footer-col ul li a {
+        font-size: 13px;
+        color: var(--text-muted);
+        transition: color 0.2s;
+      }
+
+      .footer-col ul li a:hover {
+        color: var(--light);
+      }
+
+      .footer-contact-item {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 14px;
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      .footer-contact-item .icon {
+        color: var(--gold);
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+        color: var(--text-muted);
+      }
+
+      .footer-payment {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .payment-badge {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 4px 10px;
+        font-size: 11px;
+        color: var(--text-muted);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ── Mockup Label ── -->
+    <div class="mockup-banner">
+      ⚠ PRIJEDLOG DIZAJNA — RTX Watch & Parts — Nije gotova stranica
+    </div>
+
+    <!-- ── Navigation ── -->
+    <nav>
+      <div class="nav-logo">
+        RTX
+        <span>Watch &amp; Parts</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#">Satovi</a></li>
+        <li><a href="#">Popravak &amp; Servis</a></li>
+        <li><a href="#">O nama</a></li>
+        <li><a href="#">Kontakt</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="nav-lang">
+          <span class="active">HR</span>
+          <span>EN</span>
+          <span>DE</span>
+        </div>
+        <div class="nav-cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 01-8 0" />
+          </svg>
+          Košarica (0)
+        </div>
+      </div>
+    </nav>
+
+    <!-- ── Hero ── -->
+    <section class="hero">
+      <img
+        class="hero-img"
+        src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=1800&q=80"
+        alt="Luksuzni sat"
+      />
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <div class="hero-tag">Zagreb &amp; Opatija — Od 1990.</div>
+        <h1 class="hero-title">
+          Svaki sat<br />
+          zaslužuje <em>majstora</em>
+        </h1>
+        <p class="hero-subtitle">
+          Specijalist za prodaju i servis originalnih luksuznih satova.
+          Više od 400 zadovoljnih kupaca diljem svijeta, 30 godina iskustva.
+        </p>
+        <div class="hero-cta">
+          <a href="#satovi" class="btn-primary">Pogledaj ponudu</a>
+          <a href="#servis" class="btn-outline">Naruči servis</a>
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">30+</div>
+          <div class="hero-stat-label">Godina iskustva</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">400+</div>
+          <div class="hero-stat-label">Zadovoljnih kupaca</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">24mj</div>
+          <div class="hero-stat-label">Jamstvo RTX</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── USP Strip ── -->
+    <div class="usp-strip">
+      <div class="usp-item">
+        <div class="usp-icon">🏆</div>
+        <div class="usp-text">
+          <strong>30+ godina iskustva</strong>
+          <span>Urarski servis od 1990. godine</span>
+        </div>
+      </div>
+      <div class="usp-item">
+        <div class="usp-icon">📜</div>
+        <div class="usp-text">
+          <strong>RTX certifikat</strong>
+          <span>Svaki sat dolazi s certifikatom</span>
+        </div>
+      </div>
+      <div class="usp-item">
+        <div class="usp-icon">🛡️</div>
+        <div class="usp-text">
+          <strong>24 mjeseca jamstva</strong>
+          <span>Na sve usluge i prodane satove</span>
+        </div>
+      </div>
+      <div class="usp-item">
+        <div class="usp-icon">📦</div>
+        <div class="usp-text">
+          <strong>DHL dostava</strong>
+          <span>Osigurana isporuka diljem svijeta</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Categories ── -->
+    <section class="categories" id="satovi">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Naša ponuda</div>
+          <h2 class="section-title">Certificirani luksuzni satovi</h2>
+          <p class="section-desc">
+            Svaki sat je osobno provjeren, servisan i certificiran.
+            Biramo samo najkvalitetnije primjerke za naše kupce.
+          </p>
+        </div>
+        <div class="right">
+          <a href="#" class="btn-outline">Svi satovi</a>
+        </div>
+      </div>
+
+      <div class="categories-grid">
+        <div class="category-card">
+          <img
+            src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=900&q=80"
+            alt="Vintage satovi"
+          />
+          <div class="category-card-overlay"></div>
+          <div class="category-card-content">
+            <div class="category-tag">Kolekcija</div>
+            <div class="category-title">Vintage</div>
+            <div class="category-cta">Pogledaj ponudu →</div>
+          </div>
+        </div>
+        <div class="category-card">
+          <img
+            src="https://images.unsplash.com/photo-1612817288484-6f916006741a?w=900&q=80"
+            alt="Classic satovi"
+          />
+          <div class="category-card-overlay"></div>
+          <div class="category-card-content">
+            <div class="category-tag">Kolekcija</div>
+            <div class="category-title">Classic</div>
+            <div class="category-cta">Pogledaj ponudu →</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Featured Watches ── -->
+    <section class="featured">
+      <div class="section-header">
+        <div>
+          <div class="section-label">Novo u ponudi</div>
+          <h2 class="section-title">Istaknuti satovi</h2>
+        </div>
+        <div class="right">
+          <a href="#" class="btn-outline">Sve satove</a>
+        </div>
+      </div>
+
+      <div class="watches-grid">
+        <!-- Sat 1 -->
+        <div class="watch-card">
+          <div class="watch-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=600&q=80"
+              alt="Rolex Submariner"
+            />
+            <div class="watch-badge">Novo</div>
+          </div>
+          <div class="watch-card-body">
+            <div class="watch-brand">Rolex</div>
+            <div class="watch-name">Submariner Date STURBAKS</div>
+            <div class="watch-ref">Ref. 126610LV · Full Set · 41mm</div>
+            <div class="watch-footer">
+              <div class="watch-price">14.650 <span>EUR</span></div>
+              <div class="watch-btn">Saznaj više</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sat 2 -->
+        <div class="watch-card">
+          <div class="watch-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&q=80"
+              alt="Rolex GMT"
+            />
+            <div class="watch-badge">Novo</div>
+          </div>
+          <div class="watch-card-body">
+            <div class="watch-brand">Rolex</div>
+            <div class="watch-name">GMT-Master II Jubilee</div>
+            <div class="watch-ref">Ref. 126710BLRO · 2024 · Full Set</div>
+            <div class="watch-footer">
+              <div class="watch-price">17.500 <span>EUR</span></div>
+              <div class="watch-btn">Saznaj više</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sat 3 -->
+        <div class="watch-card">
+          <div class="watch-card-img">
+            <img
+              src="https://images.unsplash.com/photo-1434056886845-dac89ffe9b56?w=600&q=80"
+              alt="Omega Constellation"
+            />
+          </div>
+          <div class="watch-card-body">
+            <div class="watch-brand">Omega</div>
+            <div class="watch-name">Constellation Day Date</div>
+            <div class="watch-ref">Ref. 168.029 · White Gold · Automatic</div>
+            <div class="watch-footer">
+              <div class="watch-price">1.220 <span>EUR</span></div>
+              <div class="watch-btn">Saznaj više</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── About ── -->
+    <div class="about">
+      <div class="about-img">
+        <img
+          src="https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=900&q=80"
+          alt="RTX radionica"
+        />
+        <div class="about-img-overlay"></div>
+      </div>
+      <div class="about-content">
+        <div class="section-label">O nama</div>
+        <h2 class="section-title">Više od 30 godina<br />strasti i preciznosti</h2>
+        <p class="section-desc">
+          RTX je obiteljska tvrtka utemeljena na profesionalnosti, stručnosti i ljubavi prema
+          satovima. Dugogodišnji rad u radionicama svjetskih brandova dao nam je znanje koje
+          dijelimo s kupcima diljem Europe.
+        </p>
+        <ul class="about-list">
+          <li>Radionice u Zagrebu i Opatiji</li>
+          <li>Ovlašteni servis vodećih svjetskih brandova</li>
+          <li>Svaki sat dolazi s RTX certifikatom autentičnosti</li>
+          <li>Besplatna putna torbica uz svaki servisirani sat</li>
+          <li>Suradnja s DHL-om za sigurnu dostavu</li>
+        </ul>
+        <a href="#" class="btn-primary">Saznaj više o nama</a>
+      </div>
+    </div>
+
+    <!-- ── Service ── -->
+    <section class="service" id="servis">
+      <div class="section-header" style="flex-direction: column; align-items: center; text-align: center;">
+        <div>
+          <div class="section-label">Naš proces</div>
+          <h2 class="section-title">Popravak &amp; Servis</h2>
+          <p class="section-desc" style="margin: 0 auto;">
+            Svaki sat tretiramo s maksimalnom pažnjom. Od primitka do isporuke,
+            pratite status vašeg sata u svakom koraku.
+          </p>
+        </div>
+      </div>
+
+      <div class="service-steps">
+        <div class="service-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Prijem sata</div>
+          <p class="step-desc">Donosišete sat osobno ili šaljete DHL-om. Potvrda primitka u roku 24h.</p>
+        </div>
+        <div class="service-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Dijagnostika</div>
+          <p class="step-desc">Detaljni pregled mehanizma, kućišta i remena. Izrađujemo servisni protokol.</p>
+        </div>
+        <div class="service-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Servis &amp; popravak</div>
+          <p class="step-desc">Koristimo isključivo originalne dijelove. Preciznost do mikrometra.</p>
+        </div>
+        <div class="service-step">
+          <div class="step-num">04</div>
+          <div class="step-title">RTX certifikat</div>
+          <p class="step-desc">Isporuka s certifikatom, servisnom karticom i besplatnom putnom torbicom.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Cert Banner ── -->
+    <div class="cert-banner">
+      <div class="cert-banner-text">
+        <h3>24 mjeseca jamstva na sve RTX usluge</h3>
+        <p>
+          Svaki sat koji prođe kroz naše ruke dobiva osobnu RTX servisnu karticu i certifikat
+          autentičnosti. Jamstvo vrijedi diljem Europe.
+        </p>
+      </div>
+      <a href="#" class="btn-primary">Naruči servis</a>
+    </div>
+
+    <!-- ── Instagram ── -->
+    <section class="instagram">
+      <div class="section-header">
+        <div class="section-label">Instagram</div>
+        <h2 class="section-title">@rtx_watch_parts</h2>
+        <p class="section-desc">Pratite nas na Instagramu za najnovije satove, servisne priče i novosti iz radionica.</p>
+      </div>
+
+      <div class="insta-grid">
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&q=70" alt="" />
+          <div class="insta-overlay"><span>♡</span></div>
+        </div>
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1533139502658-0198f920d8e8?w=400&q=70" alt="" />
+          <div class="insta-overlay"><span>♡</span></div>
+        </div>
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1548169874-53e85f753f1e?w=400&q=70" alt="" />
+          <div class="insta-overlay"><span>♡</span></div>
+        </div>
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1619134778706-7015533a6150?w=400&q=70" alt="" />
+          <div class="insta-overlay"><span>♡</span></div>
+        </div>
+        <div class="insta-item">
+          <img src="https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?w=400&q=70" alt="" />
+          <div class="insta-overlay"><span>♡</span></div>
+        </div>
+      </div>
+
+      <div class="insta-handle">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+        Prati @rtx_watch_parts
+      </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo">RTX <span>Watch &amp; Parts</span></div>
+          <p>
+            Specijalist za prodaju i servis originalnih luksuznih satova.
+            Više od 30 godina rada i iskustva u srcu Zagreba i Opatije.
+          </p>
+          <div class="footer-socials">
+            <div class="footer-social-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </div>
+            <div class="footer-social-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ponuda</h4>
+          <ul>
+            <li><a href="#">Vintage satovi</a></li>
+            <li><a href="#">Classic satovi</a></li>
+            <li><a href="#">Otkup sata</a></li>
+            <li><a href="#">Novo u ponudi</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Usluge</h4>
+          <ul>
+            <li><a href="#">Popravak satova</a></li>
+            <li><a href="#">Servis satova</a></li>
+            <li><a href="#">Poliranje</a></li>
+            <li><a href="#">RTX certifikat</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <div class="footer-contact-item">
+            <span class="icon">📍</span>
+            <span>Prolaz sestara Baković 1,<br />10000 Zagreb</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="icon">📍</span>
+            <span>Ul. Maršala Tita 144–148,<br />51410 Opatija</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="icon">✉️</span>
+            <span>rtxwatchparts@gmail.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 RTX Watch &amp; Parts. Sva prava pridržana.</span>
+        <div class="footer-payment">
+          <div class="payment-badge">Erste banka</div>
+          <div class="payment-badge">Visa</div>
+          <div class="payment-badge">Mastercard</div>
+          <div class="payment-badge">DHL</div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
